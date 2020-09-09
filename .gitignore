@@ -1,0 +1,6 @@
+.stack-work/
+*~
+discord-watchdog-haskell.cabal
+discord-watchdog-haskell.iml
+
+.env
