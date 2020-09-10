@@ -1,9 +1,11 @@
 module Permission
     ( PermissionFlag (..)
     , fromFlag
+    , fromBit
     ) where
 
 import Data.Maybe (fromJust)
+import Data.Tuple (swap)
 
 data PermissionFlag =
     CreateInstantInvite |
@@ -76,3 +78,6 @@ permissionTable =
 
 fromFlag :: PermissionFlag -> Integer
 fromFlag = fromJust . flip lookup permissionTable
+
+fromBit :: Integer -> PermissionFlag
+fromBit = fromJust . flip lookup (map swap permissionTable)
