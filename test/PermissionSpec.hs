@@ -20,3 +20,11 @@ spec = do
             fromBit 0x00008000 `shouldBe` AttachFiles
         it "should not be Connect when arg is 0x40000000" $ do
             fromBit 0x40000000 `shouldNotBe` Connect
+
+    describe "fromFlags" $ do
+        it "shoud be 0x00000402 when arg is [KickMembers, ViewChannel]" $ do
+            fromFlags [KickMembers, ViewChannel] `shouldBe` 0x00000402
+        it "shoud be 0x00000003 when arg is [CreateInstantInvite, KickMembers]" $ do
+            fromFlags [CreateInstantInvite, KickMembers] `shouldBe` 0x00000003
+        it "shoud be 0x00000014 when arg is [BanMembers, BanMembers, ManageChannels]" $ do
+            fromFlags [BanMembers, BanMembers, ManageChannels] `shouldBe` 0x00000014

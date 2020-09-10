@@ -2,10 +2,12 @@ module Permission
     ( PermissionFlag (..)
     , fromFlag
     , fromBit
+    , fromFlags
     ) where
 
 import Data.Maybe (fromJust)
 import Data.Tuple (swap)
+import Data.Bits ((.|.))
 
 data PermissionFlag =
     CreateInstantInvite |
@@ -81,3 +83,6 @@ fromFlag = fromJust . flip lookup permissionTable
 
 fromBit :: Integer -> PermissionFlag
 fromBit = fromJust . flip lookup (map swap permissionTable)
+
+fromFlags :: [PermissionFlag] -> Integer
+fromFlags = foldl (\acc x -> acc .|. fromFlag x) 0
