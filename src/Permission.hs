@@ -1,6 +1,9 @@
 module Permission
     ( PermissionFlag (..)
+    , fromFlag
     ) where
+
+import Data.Maybe (fromJust)
 
 data PermissionFlag =
     CreateInstantInvite |
@@ -70,3 +73,6 @@ permissionTable =
     , (ManageWebhooks,      0x20000000)
     , (ManageEmojis,        0x40000000)
     ]
+
+fromFlag :: PermissionFlag -> Integer
+fromFlag = fromJust . flip lookup permissionTable
